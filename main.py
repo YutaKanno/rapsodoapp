@@ -45,7 +45,8 @@ def main_page():
     st.set_page_config(layout="wide")
 
 
-
+    st.image('header.png')
+    st.write('<<選手選択,その他フィルターは左のサイドバーから>>')
     st.header("Summary")
 
 
@@ -116,7 +117,7 @@ def main_page():
         st.pyplot(spin_eff)
         
 
-    st.header('Density Plot')
+    st.header('Trend Plot')
     plot_kind2 = st.selectbox('', ['球速', '回転数', '回転効率'], key='trend_plot_kind')
     trend_plot = functions.trend_plot(filtered_data, plot_kind2)
     st.pyplot(trend_plot)
