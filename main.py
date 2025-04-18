@@ -44,16 +44,6 @@ def main_page():
     # Set the page layout to wide mode
     st.set_page_config(layout="wide")
 
-
-    st.image('header.png')
-    st.write('<<選手選択,その他フィルターは左のサイドバーから>>')
-    st.header("Summary")
-
-
-    # Add a sidebar with a selectbox for the Name column
-    st.sidebar.image('./Rapsodo-Logo.png')
-    st.sidebar.header("Filter by Name")
-
     selected_name = st.sidebar.selectbox("Select a Name", rapdata['Name'].unique())
     filt_data = rapdata[rapdata['Name'] == selected_name]
     # Add a sidebar for date filtering
@@ -66,10 +56,26 @@ def main_page():
     st.sidebar.header("Filter by Pitch Type")
     selected_pitch_types = st.sidebar.multiselect(
         "Select Pitch Type(s)", 
-        options=rapdata['Pitch_Type'].unique(), 
-        default=rapdata['Pitch_Type'].unique()
+        options=filt_data2['Pitch_Type'].unique(), 
+        default=filt_data2['Pitch_Type'].unique()
     )
     filtered_data = filt_data2[filt_data2['Pitch_Type'].isin(selected_pitch_types)]
+    
+    
+    
+    
+    st.image('header.png')
+    st.write('<<選手選択,その他フィルターは左のサイドバーから>>')
+    st.header(selected_name)
+    st.subheader(f'{start_date}~{end_date}')
+    st.header("Summary")
+
+
+    # Add a sidebar with a selectbox for the Name column
+    st.sidebar.image('./Rapsodo-Logo.png')
+    st.sidebar.header("Filter by Name")
+
+    
 
     table = functions.make_rap_table(filtered_data)
     st.dataframe(table, use_container_width=True)
