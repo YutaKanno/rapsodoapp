@@ -44,6 +44,10 @@ def main_page():
     # Set the page layout to wide mode
     st.set_page_config(layout="wide")
 
+    # Add a sidebar with a selectbox for the Name column
+    st.sidebar.image('./Rapsodo-Logo.png')
+    st.sidebar.header("Filter by Name")
+    
     selected_name = st.sidebar.selectbox("Select a Name", rapdata['Name'].unique())
     filt_data = rapdata[rapdata['Name'] == selected_name]
     # Add a sidebar for date filtering
@@ -71,9 +75,7 @@ def main_page():
     st.header("Summary")
 
 
-    # Add a sidebar with a selectbox for the Name column
-    st.sidebar.image('./Rapsodo-Logo.png')
-    st.sidebar.header("Filter by Name")
+    
 
     
 
